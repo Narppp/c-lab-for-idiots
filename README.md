@@ -19,7 +19,18 @@ I made this repo to track my current progress and learn more complex stuff in C.
 - You will need a POSIX compliant environment (Linux or Unix)
 - Use 'gcc' or 'clang'
 
-change to that directory first
+clone the repo
+**HTTPS**
+```bash
+git clone https://github.com/Narppp/c-lab-for-idiots.git
+```
+
+**SSH**
+```bash
+git clone git@github.com:Narppp/c-lab-for-idiots.git
+```
+
+change to your desired directory
 ```bash
 cd [dir]
 ```
