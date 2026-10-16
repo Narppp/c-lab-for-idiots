@@ -19,7 +19,7 @@ I made this repo to track my current progress and learn more complex stuff in C.
 - You will need a POSIX compliant environment (Linux or Unix)
 - Use 'gcc' or 'clang'
 
-clone the repo
+#### clone the repo
 **HTTPS**
 ```bash
 git clone https://github.com/Narppp/c-lab-for-idiots.git
@@ -37,12 +37,12 @@ cd [dir]
 
 then do this command
 ```bash
-gcc -o exec/[filename] [filename].c
+gcc -Wall -Wextra -g -fsanitize=address,undefined -o exec/[filename] [filename].c
 ./exec/[filename]
 
 or
 
-clang -o exec/[filename] [filename].c
+clang -Wall -Wextra -g -fsanitize=address,undefined -o exec/[filename] [filename].c
 ./exec/[filename]
 ```
 
