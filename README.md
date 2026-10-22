@@ -22,12 +22,12 @@ I made this repo to track my current progress and learn more complex stuff in C.
 #### clone the repo
 **HTTPS**
 ```bash
-git clone https://github.com/[username]/c-lab-for-idiots.git
+git clone https://github.com/Narppp/c-lab-for-idiots.git
 ```
 
-**SSH**
+**SSH (RECOMMENDED)**
 ```bash
-git clone git@github.com:[username]/c-lab-for-idiots.git
+git clone git@github.com:Narppp/c-lab-for-idiots.git
 ```
 
 change to your desired directory
