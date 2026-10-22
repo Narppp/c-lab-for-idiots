@@ -14,22 +14,35 @@
 * fill it, print it, free it.
 */
 
-void clearbuffer(void)
+void clear_buffer(void)
 {
         int c = 0;
         while ((c = getchar()) != '\n' && (c != EOF));
 }
 
-int **free_grid(int **grid, int grid_size)
+/*
+* NOTE TO SELF:
+* this function allocates columns for each row on the grid, this depends in how many the user wants.
+*/
+int **alloc_columns(int **grid, int rows, int column_amount)
 {
-        for (int i = 0; i < grid_size; i++) {
-                free(grid[i]);
+        for (int idx = 0; idx < rows; idx++) {
+                grid[idx] = malloc(column_amount * sizeof(int));
         }
 
         return grid;
 }
 
-char *get_input(char *buffer
+void free_entire_grid(int **grid, int grid_size)
+{
+        for (int i = 0; i < grid_size; i++) {
+                free(grid[i]);
+        }
+
+        free(grid);
+}
+
+char *get_input(char *buffer)
 {
         while (1) {
                 if (fgets(buffer, MAX_BUF, stdin) == NULL)
@@ -37,7 +50,7 @@ char *get_input(char *buffer
 
                 if (buffer[strcspn(buffer, "\n")] != '\n') {
                         printf("Buffer Overflowed.\n");
-                        clearbuffer();
+                        clear_buffer();
                         continue;
                 }
                 buffer[strcspn(buffer, "\n")] = '\0';
@@ -50,10 +63,10 @@ char *get_input(char *buffer
 
 int convert_input(char *buffer)
 {
-        unsigned char *holdchar = NULL;
-        int convert_num = (int)strtol(buffer, &holdchar, 10);
+        char *hold_char = NULL;
+        int convert_num = (int)strtol(buffer, &hold_char, 10);
 
-        if (holdchar == buffer || *holdchar != '\0') {
+        if (hold_char == buffer || *hold_char != '\0') {
                 printf("Convertion Failed.\n");
                 return CONVERT_FAILED;
         }
@@ -66,18 +79,31 @@ int convert_input(char *buffer)
         return convert_num;
 }
 
-int **fill_grid(int **grid, int grid_size) 
+int **fill_columns(int **grid, int rows, int column_amount) 
 {
         char buffer[MAX_BUF] = {0};
         int idx = 0;
+        int column_count = 0;
 
-        while (idx < grid_size) {
-                printf("Enter number %d: ", idx + 1);
+        while (idx < rows) {
+
+                if (column_count == column_amount) {
+                        column_count = 0;
+                        idx++;
+                }
+
+                printf("Enter number %d in column %d: ", column_count + 1, idx + 1);
                 get_input(buffer);
 
                 int arr_num = convert_input(buffer);
 
-                idx++;
+                grid[idx][column_count] = arr_num;
+
+                if (grid[idx][column_count] == CONVERT_FAILED) {
+                        exit(1);
+                }
+
+                column_count++;
         }
 
         return grid;
@@ -86,14 +112,14 @@ int **fill_grid(int **grid, int grid_size)
 int main(void)
 {
         char buffer[MAX_BUF] = {0};
+        printf("Enter the number of grids you want for your array: ");
         get_input(buffer);
 
-        printf("Enter the number of grids you want for your array: ");
         int rows = convert_input(buffer);
 
         if (rows == CONVERT_FAILED) {
                 exit(1);
-        }
+        } 
 
         int **grid = malloc(rows * sizeof(int *));
 
@@ -102,20 +128,20 @@ int main(void)
                 exit(1);
         }
 
-        printf("Grid allocation successful :)\n");
+        printf("Enter the amount of columns inside your grids: ");
+        get_input(buffer);
 
-        for (int i = 0; i < rows; i++) {
-                grid[i] = malloc(5 * sizeof(int));
+        int columns = convert_input(buffer);
 
-                if (grid[i] == NULL) {
-                        printf("column allocation failed.\n");
-                        exit(1);
-                }
+        if (columns == CONVERT_FAILED) {
+                exit(1);
         }
 
-        free_grid(grid, rows);
-        free(grid);
+        alloc_columns(grid, rows, columns);
+        fill_columns(grid, rows, columns);
 
+        free_entire_grid(grid, rows);
         grid = NULL;
+
         return 0;
 }
