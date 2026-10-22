@@ -26,18 +26,16 @@ void clear_buffer(void)
 */
 int **alloc_columns(int **grid, int rows, int column_amount)
 {
-        for (int idx = 0; idx < rows; idx++) {
+        for (int idx = 0; idx < rows; idx++)
                 grid[idx] = malloc(column_amount * sizeof(int));
-        }
 
         return grid;
 }
 
 void free_entire_grid(int **grid, int grid_size)
 {
-        for (int i = 0; i < grid_size; i++) {
+        for (int i = 0; i < grid_size; i++)
                 free(grid[i]);
-        }
 
         free(grid);
 }
@@ -51,7 +49,7 @@ char *get_input(char *buffer)
                 if (buffer[strcspn(buffer, "\n")] != '\n') {
                         printf("Buffer Overflowed.\n");
                         clear_buffer();
-                        continue;
+                        exit(1);
                 }
                 buffer[strcspn(buffer, "\n")] = '\0';
 
@@ -85,11 +83,14 @@ int **fill_columns(int **grid, int rows, int column_amount)
         int idx = 0;
         int column_count = 0;
 
-        while (idx < rows) {
+        while (1) {
 
                 if (column_count == column_amount) {
                         column_count = 0;
                         idx++;
+
+                        if (idx == rows)
+                                break;
                 }
 
                 printf("Enter number %d in column %d: ", column_count + 1, idx + 1);
@@ -99,14 +100,35 @@ int **fill_columns(int **grid, int rows, int column_amount)
 
                 grid[idx][column_count] = arr_num;
 
-                if (grid[idx][column_count] == CONVERT_FAILED) {
+                if (grid[idx][column_count] == CONVERT_FAILED)
                         exit(1);
-                }
 
                 column_count++;
         }
 
         return grid;
+}
+
+void print_grid(int **grid, int rows, int column_amount)
+{
+        int idx = 0;
+        int column_count = 0;
+
+        printf("\n\n");
+        while (1) {
+                
+                if (column_count == column_amount) {
+                        column_count = 0;
+                        idx++;
+
+                        if (idx == rows)
+                                break;
+                }
+
+                printf("grid[%d][%d]: %d\n", idx, column_count, grid[idx][column_count]);
+
+                column_count++;
+        }
 }
 
 int main(void)
@@ -117,9 +139,8 @@ int main(void)
 
         int rows = convert_input(buffer);
 
-        if (rows == CONVERT_FAILED) {
+        if (rows == CONVERT_FAILED)
                 exit(1);
-        } 
 
         int **grid = malloc(rows * sizeof(int *));
 
@@ -133,15 +154,23 @@ int main(void)
 
         int columns = convert_input(buffer);
 
-        if (columns == CONVERT_FAILED) {
+        if (columns == CONVERT_FAILED)
                 exit(1);
-        }
 
         alloc_columns(grid, rows, columns);
         fill_columns(grid, rows, columns);
+
+        print_grid(grid, rows, columns);
 
         free_entire_grid(grid, rows);
         grid = NULL;
 
         return 0;
 }
+
+/*
+* took longer than expected but I fully understood how to make dynamically sized 2d arrays now.
+* this is such a great project because it forced me to understand how to use pointers properly and make sure that it has
+* no overflow vulnerabilities. I will refactor this in the future because using malloc for each column is not the best but
+* this should be a decent starting point.
+*/
