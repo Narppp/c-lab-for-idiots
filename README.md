@@ -17,9 +17,10 @@ I made this repo to track my current progress and learn more complex stuff in C.
 - Double Free/Dangling Pointers - Caused by freeing an already freed memory block or pointing to a memory block that is already freed
 - Shift Overflows/Bugs - Caused by shifting bits too far to the signed bits
 
-## How you can compile it
-- You will need a POSIX compliant environment (Linux or Unix)
-- Use 'gcc' or 'clang'
+### Folder Structure
+- 'challenge-code/' is for you to test the vulnerabilities and fix each code problem
+- 'my-practice-code/' is my personal code that you can also test or break
+- 'my-projects/' are the big projects that I will do with those concepts
 
 #### clone the repo
 **HTTPS**
@@ -31,6 +32,10 @@ git clone https://github.com/Narppp/c-lab-for-idiots.git
 ```bash
 git clone git@github.com:Narppp/c-lab-for-idiots.git
 ```
+
+## How you can compile it (my-practice-code/ and challenge-code/ directories)
+- You will need a POSIX compliant environment (Linux or Unix)
+- Use 'gcc' or 'clang'
 
 change to your desired directory
 ```bash
@@ -48,8 +53,18 @@ clang -Wall -Wextra -Werror -g -fsanitize=address,undefined -o exec/[executable_
 ./exec/[executable_name]
 ```
 
-### Folder Structure
-- 'challenge-code/' is for you to test the vulnerabilities and fix each code problem
-- 'my-practice-code/' is my personal code that you can also test or break
-- 'my-projects/' are the big projects that I will do with those concepts
+## How you can compile my projects (my-projects/ directory)
 
+go to your desired project folder
+```bash
+cd [project_dir]
+```
+
+**then type 'make help'**
+```bash
+make help
+```
+
+- Help commands should appear when you do that, then just do the commands to build my projects easily.
+
+have fun exploring!
