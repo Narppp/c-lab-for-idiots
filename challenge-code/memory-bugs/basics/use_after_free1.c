@@ -22,6 +22,12 @@
 * the output to see what value it may print out.
 */
 
+/*
+* NOTE:
+* if you want to get the full output without it stopping abruptly because of ASan, you can just remove
+* -fsanitize=address,undefined when compiling the program.
+*/
+
 
 /*
 * These are just regular helper functions for user inputs, you can remove them if you want and brute force tests.
