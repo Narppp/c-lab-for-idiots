@@ -44,12 +44,12 @@ cd [dir]
 
 then do this command
 ```bash
-gcc -Wall -Wextra -Werror -g -fsanitize=address,undefined -o exec/[executable_name] [filename].c
+gcc -Wall -Wextra -g -fsanitize=address,undefined -o exec/[executable_name] [filename].c
 ./exec/[executable_name]
 
 or
 
-clang -Wall -Wextra -Werror -g -fsanitize=address,undefined -o exec/[executable_name] [filename].c
+clang -Wall -Wextra -g -fsanitize=address,undefined -o exec/[executable_name] [filename].c
 ./exec/[executable_name]
 ```
 
