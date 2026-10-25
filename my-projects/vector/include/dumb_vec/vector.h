@@ -4,6 +4,8 @@
 
 #include <errno.h>
 #include <stdio.h>
+#include <limits.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -15,9 +17,9 @@ struct vector {
         size_t vec_cap;
 };
 
-struct *vector alloc_vec();
-void push_vec(struct *vector, int value);
-int pop_vec(struct *vector);
-void free_vec(struct *vector);
+struct vector *alloc_vec();
+void push_vec(struct vector *vec, int value);
+int pop_vec(struct vector *vec);
+void free_vec(struct vector *vec);
 
 #endif
