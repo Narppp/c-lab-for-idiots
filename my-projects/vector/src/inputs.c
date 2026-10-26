@@ -2,8 +2,10 @@
 #include <dumb_vec/inputs.h>
 #include <dumb_vec/vector.h>
 
-void menu(void)
+void menu(struct vector *vec)
 {
+        printf("Vector size: %lu\n", vec->vec_size);
+        printf("Vector capacity: %lu\n", vec->vec_cap);
         printf("1: Push\n");
         printf("2: Pop\n");
         printf("3: Exit\n");
@@ -34,20 +36,20 @@ char *get_input(char *buffer)
         return buffer;
 }
 
-int convert_input(struct vector *vec, char *buffer)
+int convert_vec_data(char *buffer)
 {
         char *hold_chars = NULL;
-        vec->data[vec->vec_size] = (int)strtol(buffer, &hold_chars, 10);
+        int converted_data = (int)strtol(buffer, &hold_chars, 10);
 
         if (hold_chars == buffer || *hold_chars != '\0') {
                 printf("Invalid input.\n");
                 exit(1);
         }
 
-        if (vec->data[vec->vec_size] <= 0 || vec->data[vec->vec_size] > INT_MAX) {
+        if (converted_data <= 0 || converted_data > INT_MAX) {
                 printf("Invalid number.\n");
                 exit(1);
         }
 
-        return vec->data[vec->vec_size];
+        return converted_data;
 }
