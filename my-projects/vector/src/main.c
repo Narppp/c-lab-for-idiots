@@ -14,7 +14,7 @@ int main(void)
                 menu(vec);
                 printf("Enter your option number: ");
                 get_input(user_input.buffer);
-                user_input.option_num = convert_option_num(user_input.buffer);
+                user_input.option_num = convert_vec_data(user_input.buffer);
 
                 switch (user_input.option_num) {
                         case 1:
