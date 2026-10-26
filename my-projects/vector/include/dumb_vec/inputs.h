@@ -6,9 +6,14 @@
 
 #define MAX_BUF 16
 
-void menu(void);
+struct user {
+        char buffer[MAX_BUF];
+        int option_num;
+};
+
+void menu(struct vector *vec);
 void clear_buffer(void);
 char *get_input(char *buffer);
-int convert_input(struct vector *vec, char *buffer);
+int convert_vec_data(char *buffer);
 
 #endif
