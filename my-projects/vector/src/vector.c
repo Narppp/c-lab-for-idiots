@@ -19,8 +19,11 @@ struct vector *alloc_vec(void)
 
         if (test_vec->data == NULL) {
                 printf("Vector allocation failed.\n");
+                free_vector(test_vec);
                 exit(1);
         }
+
+        test_vec->data[test_vec->vec_size] = EMPTY_VECTOR;
 
         return test_vec;
 }
@@ -30,7 +33,7 @@ struct vector *alloc_vec(void)
 */
 void push_vec(struct vector *vec, int value)
 {
-        if (vec->vec_size > vec->vec_cap) {
+        if (vec->vec_size == vec->vec_cap) {
                 vec->vec_cap *= 2;                
                 int *temp_block = realloc(vec->data, vec->vec_cap * sizeof(int));
 
@@ -50,10 +53,13 @@ void push_vec(struct vector *vec, int value)
 */
 int pop_vec(struct vector *vec)
 {        
-        if (vec->vec_size == 0)
+        if (vec->vec_size == 0) {
+                vec->data[vec->vec_size] = EMPTY_VECTOR;
                 return vec->data[vec->vec_size];
+        }
 
-        return vec->data[vec->vec_size--];
+        vec->vec_size--;
+        return vec->data[vec->vec_size];
 }
 
 void free_vector(struct vector *vec)
