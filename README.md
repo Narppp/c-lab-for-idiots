@@ -9,6 +9,9 @@ I made this repo to track my current progress and learn more complex stuff in C.
 - Dynamic Memory
 - Structs
 - Bitwise Operators
+- Memory Manipulation
+- File I/O
+- Syscalls
 
 ## Vulnerabilities that may appear
 - Memory Leaks - Unfreed allocations when allocating a block of memory, causing this bug.
