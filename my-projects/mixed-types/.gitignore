@@ -1,0 +1,6 @@
+a.out
+normal_build/
+debug_build/
+obj/
+obj/norm_obj/
+obj/debug_obj/
