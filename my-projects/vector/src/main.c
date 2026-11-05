@@ -10,7 +10,7 @@ int main(void)
         int converted_data_value = 0;
         int popped_value = 0;
 
-        while (user_input.option_num != 3) {
+        while (1) {
                 menu(vec);
                 printf("Enter your option number: ");
                 get_input(user_input.buffer);
@@ -34,6 +34,18 @@ int main(void)
                                 }
 
                                 printf("Popped value: %d\n", popped_value);
+                                break;
+                        case 3:
+                                if (vec->vec_size != 0) {
+                                        printf("vector not empty yet.\n");
+                                        break;
+                                }
+
+                                printf("program exited successfully.\n");
+                                free_vector(vec);
+                                exit(0);
+                        default:
+                                printf("Invalid option.\n");
                                 break;
                 }
         }
