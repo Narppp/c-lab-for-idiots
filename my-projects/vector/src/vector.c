@@ -66,7 +66,7 @@ void free_vector(struct vector *vec)
 {
         vec->vec_size = 0;
         vec->vec_cap = 0;
-        vec->data = NULL;
 
+        free(vec->data);
         free(vec);
 }
