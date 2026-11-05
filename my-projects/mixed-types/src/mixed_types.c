@@ -23,10 +23,10 @@ struct MixedTypes *alloc_struct_data(void)
 
 void print_data(struct MixedTypes *var)
 {
-        *ptr_to_char = (char *)var->data;
-        *ptr_to_int = (int32_t *)var->data;
-        *ptr_to_float = (float *)var->data;
-        *ptr_to_double = (double *)var->data;
+        ptr_to_char = (char *)var->data;
+        ptr_to_int = (int32_t *)var->data;
+        ptr_to_float = (float *)var->data;
+        ptr_to_double = (double *)var->data;
 
         switch (var->type) {
                 case 'c':
@@ -66,13 +66,14 @@ void loop_input(struct MixedTypes *var, uint32_t size)
 {
         int32_t *int_arr = NULL;
         float *float_arr = NULL;
-        double *double_arr = NULL;
+        // double *double_arr = NULL;
 
         uint32_t idx = 0;
+        uint32_t converted_num = 0;
 
         switch (var->type) {
                 case 'i':
-                        *int_arr = malloc(size * sizeof(int32_t));
+                        int_arr = malloc(size * sizeof(int32_t));
 
                         if (int_arr == NULL) {
                                 printf("Int Array Memory Allocation Failed.\n");
@@ -82,15 +83,16 @@ void loop_input(struct MixedTypes *var, uint32_t size)
                         while (idx < size) {
                                 printf("Enter Int %d: ", idx);
                                 get_input(var->buffer);
-                                var->data = convert_input(var->buffer);
+                                converted_num = convert_input(var->buffer);
 
-                                int_arr[idx++] = *(int *)data;
+                                int_arr[idx++] = converted_num;
                         }
+                        int_arr[idx] = END_OF_ARR;
                         
                         var->data = int_arr;
                         break;
                 case 'f':
-                        *float_arr = malloc(size * sizeof(float));
+                        float_arr = malloc(size * sizeof(float));
 
                         if (float_arr == NULL) {
                                 printf("Float Memory Allocation Failed.\n");
@@ -98,8 +100,15 @@ void loop_input(struct MixedTypes *var, uint32_t size)
                         }
 
                         while (idx < size) {
+                                printf("Enter Float %d: ", idx);
+                                get_input(var->buffer);
+                                converted_num = (float)convert_input(var->buffer);
 
+                                float_arr[idx++] = converted_num;
                         }
+
+                        var->data = float_arr;
+                        break;
                 case 'd':
         }
 }
@@ -108,10 +117,16 @@ void check_struct_type(struct MixedTypes *var)
 {
         switch (var->type) {
                 case 'c':
+                        printf("Enter char: ");
+                        get_input(var->buffer);
+
+                        printf("char: %c\n", var->buffer[0]);
+                        break;
                 case 's':
                 case 'i':
                 case 'f':
                 case 'd':
                 default:
+                        printf("Invalid type.\n");
         }
 }

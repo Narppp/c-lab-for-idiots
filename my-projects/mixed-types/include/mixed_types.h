@@ -10,15 +10,17 @@
 
 #include "inputs.h"
 
+#define MAX_BUF 32
+
 struct MixedTypes {
         char buffer[MAX_BUF];
-        char data_type;
-        void *value;
+        char type;
+        void *data;
 };
 
 struct MixedTypes *alloc_struct_data(void);
 void print_data(struct MixedTypes *var);
-void loop_input(struct MixedTypes *var);
+void loop_input(struct MixedTypes *var, uint32_t size);
 void check_struct_type(struct MixedTypes *var);
 
 #endif

@@ -1,6 +1,15 @@
 
 #include "inputs.h"
 
+void menu(void)
+{
+        printf("c: Char\n");
+        printf("s: String\n");
+        printf("i: Int\n");
+        printf("f: Float\n");
+        printf("d: Double\n");
+}
+
 void clear_buffer(void)
 {
         int c = 0;
@@ -23,6 +32,11 @@ char *get_input(char *buffer)
         return buffer;
 }
 
+/*
+ * convert_input function converts unsigned ints only, so these are the use cases of it:
+ * - option number converter
+ * - array size converter
+ */
 int32_t convert_input(char *buffer)
 {
         char *hold_char = NULL;
@@ -33,7 +47,7 @@ int32_t convert_input(char *buffer)
                 exit(1);
         }
         
-        if (converted_num <= 0 || converted_num >= INT32_MAX) {
+        if (converted_number <= 0 || converted_number >= INT32_MAX) {
                 printf("Invalid number.\n");
                 exit(1);
         }
