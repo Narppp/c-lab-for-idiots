@@ -19,7 +19,7 @@ struct MixedTypes {
 };
 
 struct MixedTypes *alloc_struct_data(void);
-void print_data(struct MixedTypes *var);
+void print_data(struct MixedTypes *var, uint32_t size);
 void loop_input(struct MixedTypes *var, uint32_t size);
 void check_struct_type(struct MixedTypes *var);
 
