@@ -27,7 +27,7 @@ debug: $(DEBUG_PROJ_NAME)
 	@gdb ./$(DEBUG_PROJ_NAME)
 
 sanitize: $(DEBUG_PROJ_NAME)
-	@./$(DEBUG_PROJ)
+	@./$(DEBUG_PROJ_NAME)
 
 valgrind: $(NORM_PROJ_NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all ./$(NORM_PROJ_NAME)
