@@ -4,12 +4,12 @@
 
 /*
  * Main function, what do we do?:
- * - allocate memory for the struct
- * = get the data type the user wants first
- * - check if valid type
- * - get input for that specific type
- * - print the output
- * - exit safely
+ * - allocate memory for the struct ✓
+ * - get the data type the user wants first ✓
+ * - check if valid type ✓
+ * - get input for that specific type ✓
+ * - print the output ✓
+ * - exit safely ✓
  */
 int main(void)
 {
